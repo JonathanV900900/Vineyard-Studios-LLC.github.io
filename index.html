@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vineyard Studios &mdash; Independent iOS Games &amp; Apps</title>
+<meta name="description" content="Vineyard Studios LLC builds polished, minimalist iOS games and apps. Currently in development: Crusaders, a co-op side-scrolling action-adventure game.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy-primary: #1D3557;
+    --navy-deep: #0F1C2E;
+    --slate-blue: #3D5A80;
+    --gray-90: #8A94A3;
+    --gray-40: #C8CDD3;
+    --gray-10: #EDF0F4;
+    --white: #FFFFFF;
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--navy-deep);
+    background: var(--white);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  img, svg { display: block; max-width: 100%; }
+
+  .wrap {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--navy-primary);
+  }
+
+  .eyebrow {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--slate-blue);
+  }
+
+  /* ---------- Nav ---------- */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--gray-40);
+  }
+
+  nav.wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 76px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .brand .mark {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+  }
+
+  .brand .name {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 17px;
+    color: var(--navy-primary);
+    letter-spacing: 0.01em;
+  }
+
+  .brand .name span {
+    color: var(--gray-90);
+    font-weight: 500;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  .nav-links a {
+    color: var(--navy-primary);
+    opacity: 0.75;
+    transition: opacity 0.2s ease;
+  }
+
+  .nav-links a:hover { opacity: 1; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    background: var(--navy-deep);
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero .wrap {
+    padding: 120px 32px 140px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-content { max-width: 620px; }
+
+  .hero .eyebrow { color: var(--gray-40); margin-bottom: 18px; display: block; }
+
+  .hero h1 {
+    color: var(--white);
+    font-size: 52px;
+    line-height: 1.12;
+    margin-bottom: 22px;
+  }
+
+  .hero p.lead {
+    font-size: 18px;
+    color: var(--gray-40);
+    max-width: 520px;
+    margin-bottom: 36px;
+  }
+
+  .cta-row { display: flex; gap: 16px; flex-wrap: wrap; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 26px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 15px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  .btn:hover { transform: translateY(-2px); }
+
+  .btn-primary {
+    background: var(--white);
+    color: var(--navy-deep);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--white);
+    border: 1px solid rgba(255,255,255,0.35);
+  }
+
+  /* decorative geometric shapes echoing the mark, restrained + minimal */
+  .hero-decor {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .hero-decor svg { position: absolute; opacity: 0.5; }
+
+  /* ---------- Section shell ---------- */
+  section:not(.hero) { padding: 96px 0; }
+
+  .section-head { max-width: 640px; margin-bottom: 56px; }
+
+  .section-head .eyebrow { margin-bottom: 14px; display: block; }
+
+  .section-head h2 { font-size: 34px; margin-bottom: 16px; }
+
+  .section-head p { color: var(--gray-90); font-size: 16px; }
+
+  /* ---------- About / Values ---------- */
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+  }
+
+  .value-card {
+    background: var(--gray-10);
+    border-radius: 14px;
+    padding: 28px 24px;
+  }
+
+  .value-card .icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 9px;
+    background: var(--navy-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 18px;
+  }
+
+  .value-card .icon svg { width: 18px; height: 18px; }
+
+  .value-card h3 {
+    font-size: 17px;
+    margin-bottom: 8px;
+  }
+
+  .value-card p {
+    font-size: 14.5px;
+    color: var(--gray-90);
+  }
+
+  /* ---------- Game section ---------- */
+  .game {
+    background: var(--gray-10);
+  }
+
+  .game-layout {
+    max-width: 640px;
+  }
+
+  .game-copy .eyebrow { margin-bottom: 14px; display: block; }
+
+  .game-copy h2 {
+    font-size: 36px;
+    margin-bottom: 18px;
+  }
+
+  .game-copy p.desc {
+    color: var(--navy-primary);
+    opacity: 0.85;
+    font-size: 16px;
+    margin-bottom: 28px;
+  }
+
+  .feature-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-bottom: 34px;
+  }
+
+  .feature-item {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .feature-item .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--slate-blue);
+    margin-top: 8px;
+    flex-shrink: 0;
+  }
+
+  .feature-item h4 {
+    font-family: var(--font-display);
+    font-size: 15.5px;
+    color: var(--navy-primary);
+    margin-bottom: 4px;
+  }
+
+  .feature-item p {
+    font-size: 14.5px;
+    color: var(--gray-90);
+  }
+
+  .game-copy .btn-primary-alt {
+    background: var(--navy-primary);
+    color: var(--white);
+    display: inline-flex;
+  }
+
+  /* ---------- Contact / Footer ---------- */
+  footer {
+    background: var(--navy-deep);
+    color: var(--gray-40);
+  }
+
+  footer .wrap {
+    padding: 88px 32px 40px;
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 48px;
+    padding-bottom: 56px;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+  }
+
+  .footer-brand .brand .name { color: var(--white); }
+  .footer-brand .brand .name span { color: var(--gray-90); }
+
+  .footer-brand p {
+    margin-top: 18px;
+    font-size: 14.5px;
+    max-width: 320px;
+    color: var(--gray-90);
+  }
+
+  .footer-col h4 {
+    font-family: var(--font-display);
+    font-size: 14px;
+    color: var(--white);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 18px;
+  }
+
+  .footer-col a, .footer-col p {
+    display: block;
+    font-size: 14.5px;
+    color: var(--gray-90);
+    margin-bottom: 12px;
+    transition: color 0.2s ease;
+  }
+
+  .footer-col a:hover { color: var(--white); }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 28px;
+    font-size: 13px;
+    color: var(--gray-90);
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .placeholder-note {
+    font-size: 12.5px;
+    color: rgba(138,148,163,0.75);
+  }
+
+  /* ---------- Scroll fade-in ---------- */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-up.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 860px) {
+    .nav-links { display: none; }
+    .hero h1 { font-size: 38px; }
+    .values-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-top { grid-template-columns: 1fr; gap: 32px; }
+  }
+
+  @media (max-width: 480px) {
+    .values-grid { grid-template-columns: 1fr; }
+    .hero .wrap { padding: 90px 24px 100px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="brand">
+      <svg class="mark" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <rect width="200" height="200" rx="24" fill="#EDF0F4"/>
+        <path d="M40 55 L100 150 L160 55 L134 55 L100 108 L66 55 Z" fill="#1D3557"/>
+        <circle cx="100" cy="150" r="9" fill="#1D3557"/>
+        <path d="M100 108 L100 141" stroke="#EDF0F4" stroke-width="4" stroke-linecap="round"/>
+      </svg>
+      <div class="name">VINEYARD <span>STUDIOS</span></div>
+    </div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#game">Crusaders</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-decor">
+    <svg width="420" height="420" viewBox="0 0 420 420" style="top:-120px; right:-100px;">
+      <path d="M90 120 L210 320 L330 120 L280 120 L210 240 L140 120 Z" stroke="#3D5A80" stroke-width="2" fill="none"/>
+    </svg>
+    <svg width="260" height="260" viewBox="0 0 260 260" style="bottom:-80px; left:-60px;">
+      <circle cx="130" cy="130" r="120" stroke="#1D3557" stroke-width="1.5" fill="none"/>
+    </svg>
+  </div>
+  <div class="wrap">
+    <div class="hero-content">
+      <span class="eyebrow">Independent iOS Games &amp; Apps</span>
+      <h1>Polished, minimalist games &mdash; built with intention.</h1>
+      <p class="lead">Vineyard Studios LLC designs and builds iOS games and applications with a clean, restrained aesthetic. Currently in development: Crusaders, a co-op side-scrolling action-adventure.</p>
+      <div class="cta-row">
+        <a href="#game" class="btn btn-primary">Explore Crusaders</a>
+        <a href="#contact" class="btn btn-outline">Get in touch</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head fade-up">
+      <span class="eyebrow">About the studio</span>
+      <h2>Clarity over clutter, in everything we ship.</h2>
+      <p>Vineyard Studios is a small, independent team building iOS games and apps around one idea: polish beats clutter. Every release should feel deliberate &mdash; clean interfaces, confident color, and interactions that never make a player guess what happens next.</p>
+    </div>
+    <div class="values-grid">
+      <div class="value-card fade-up">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#EDF0F4" stroke-width="2" stroke-linecap="round"><path d="M4 12 L10 18 L20 6"/></svg>
+        </div>
+        <h3>Clarity</h3>
+        <p>Interfaces and art communicate instantly, without visual noise.</p>
+      </div>
+      <div class="value-card fade-up">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#EDF0F4" stroke-width="2" stroke-linecap="round"><path d="M12 3 L14.5 9 L21 9.5 L16 14 L17.5 21 L12 17.5 L6.5 21 L8 14 L3 9.5 L9.5 9 Z"/></svg>
+        </div>
+        <h3>Craft</h3>
+        <p>Small details &mdash; spacing, motion, color &mdash; are treated as seriously as core mechanics.</p>
+      </div>
+      <div class="value-card fade-up">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#EDF0F4" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <h3>Consistency</h3>
+        <p>Every release reinforces the same studio identity instead of starting from zero.</p>
+      </div>
+      <div class="value-card fade-up">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#EDF0F4" stroke-width="2" stroke-linecap="round"><path d="M5 12 H19 M12 5 V19"/></svg>
+        </div>
+        <h3>Restraint</h3>
+        <p>An element earns its place; when in doubt, we remove rather than decorate.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="game" class="game">
+  <div class="wrap">
+    <div class="game-layout">
+      <div class="game-copy fade-up">
+        <span class="eyebrow">Currently in development</span>
+        <h2>Crusaders</h2>
+        <p class="desc">A co-op side-scrolling action-adventure. Create a game or join a friend's, and fight together to reach the end &mdash; built with the same clean, minimalist art direction as everything else Vineyard Studios makes.</p>
+        <div class="feature-list">
+          <div class="feature-item">
+            <span class="dot"></span>
+            <div>
+              <h4>Co-op multiplayer</h4>
+              <p>Team up with other players in real time as you push through each level.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="dot"></span>
+            <div>
+              <h4>Create or join</h4>
+              <p>Start your own game and invite others in, or play solo.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="dot"></span>
+            <div>
+              <h4>Race to the end</h4>
+              <p>Side-scrolling levels built for tight, readable action &mdash; get your party to the finish.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="brand">
+          <svg class="mark" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <rect width="200" height="200" rx="24" fill="#1D3557"/>
+            <path d="M40 55 L100 150 L160 55 L134 55 L100 108 L66 55 Z" fill="#EDF0F4"/>
+            <circle cx="100" cy="150" r="9" fill="#EDF0F4"/>
+            <path d="M100 108 L100 141" stroke="#1D3557" stroke-width="4" stroke-linecap="round"/>
+          </svg>
+          <div class="name">VINEYARD <span>STUDIOS</span></div>
+        </div>
+        <p>An independent iOS game and app studio building polished, minimalist experiences &mdash; starting with Crusaders.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="mailto:jon@avalaskcrusaders.com">jon@avalaskcrusaders.com</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Vineyard Studios LLC. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
